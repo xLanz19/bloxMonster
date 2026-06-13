@@ -365,7 +365,7 @@ local function Build()
 	local main = Instance.new("Frame")
 	main.Size = Configuration.Window.Size
 	if IsMobile then
-		main.Size = UDim2.new(0.92, 0, 0.80, 0)
+		main.Size = UDim2.new(0.92, 0, 0.65, 0)
 	end
 	main.Position = UDim2.new(0.5, 0, 0.5, 60)
 	main.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -424,15 +424,21 @@ local function Build()
 	content.Size = UDim2.new(1, 0, 1, -54)
 	content.Position = UDim2.new(0, 0, 0, 54)
 	content.BackgroundTransparency = 1
-	content.ScrollBarThickness = 0
-	content.CanvasSize = UDim2.new(0, 0, 0, 440)
+	content.ScrollBarThickness = IsMobile and 4 or 0
+	content.ScrollingDirection = Enum.ScrollingDirection.Y
+	content.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	content.CanvasSize = UDim2.new(0, 0, 0, 0)
 	content.Parent = main
+
 	local list = Instance.new("UIListLayout")
-	list.Padding = UDim.new(0, 24)
+	list.Padding = UDim.new(0, IsMobile and 10 or 24)
 	list.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	list.SortOrder = Enum.SortOrder.LayoutOrder
 	list.Parent = content
+
 	local pad = Instance.new("UIPadding")
-	pad.PaddingTop = UDim.new(0, 5)
+	pad.PaddingTop = UDim.new(0, IsMobile and 2 or 5)
+	pad.PaddingBottom = UDim.new(0, IsMobile and 20 or 5)
 	pad.Parent = content
 	local logoContainer = Instance.new("Frame")
 	logoContainer.Size = UDim2.fromOffset(80, 80)
